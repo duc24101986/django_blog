@@ -1,0 +1,22 @@
+{% extends "blog/base.html" %}
+
+{% load bootstrap %}
+
+{% block title %} Share blog {% endblock %}
+
+{% block content %}
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title"> Share article:&nbsp<a href="/blog/{{post.id}}">{{post.title}} </a> </h3>
+        </div>
+        <div class="panel-body">
+            <form class="form-horizontal" method='POST' action="/blog/{{post.id}}/share/">
+                {% csrf_token %}
+                {{ form|bootstrap_horizontal}}
+                <input type="submit" class="btn btn-primary center-block"  value="Send email">
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

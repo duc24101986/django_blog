@@ -1,0 +1,69 @@
+{% extends "blog/base.html" %}
+
+{% load bootstrap %}
+{% block title %} post.title {% endblock %}
+
+{% block content %}
+    <!-- Blog Post -->
+
+    <!-- Title -->
+    <h1>{{post.title}} &nbsp &nbsp</h1>
+
+    <!-- Author -->
+    <p class="lead">
+        by <a href="#">{{post.author}}</a>
+    </p>
+
+    <hr>
+
+    <!-- Date/Time -->
+    <p><span class="glyphicon glyphicon-time"></span> Posted on {{post.publish}}</p>
+    <a href="/blog/{{post.id}}/share"> <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> </a>
+    {% if request.user.is_authenticated %}
+        {% if request.user == post.author %}
+            <a href="/blog/{{post.id}}/edit"> <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> </a>
+            <a href="/blog/{{post.id}}/delete"> <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> </a>
+        {% endif %}
+    {% endif %}
+    <hr>
+
+    <!-- Preview Image -->
+    <img class="img-responsive" src="http://placehold.it/900x300" alt="">
+
+    <hr>
+
+    <!-- Post Content -->
+    {{post.body}}
+    <hr>
+
+    <!-- Comment -->
+    {% for comment in comments %}
+    <div class="media">
+        <a class="pull-left" href="#">
+            <img class="media-object" src="http://placehold.it/64x64" alt="">
+        </a>
+        <div class="media-body">
+            <h4 class="media-heading">{{comment.author}}
+                <small>{{comment.created}}</small>
+            </h4>
+             {{comment.body}}
+        </div>
+    </div>
+    {% endfor %}
+
+    <hr>
+    <h3>Add new comment <br></h3>
+
+    <form method="POST" action=".">
+        <div class="form-horizontal">
+            {{ comment_form|bootstrap_horizontal}}
+            {% csrf_token %}
+        </div>
+
+        <div class="centered">
+            <button class="btn btn-large btn-primary" type="submit">Add comment</button>
+        </div>
+    </form>
+
+    <hr>
+{% endblock %}

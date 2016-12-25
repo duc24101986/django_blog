@@ -1,0 +1,27 @@
+{% extends "blog/base.html" %}
+
+{% block title %} My blog {% endblock %}
+
+{% block content %}
+        {% if messages %}
+            {% for message in messages %}
+                {% if message.tags %}
+                    <div class="alert alert-warning" role="alert">{{ message }}</div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+
+        {% for user in users%}
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title"> <a href=#>{{user.username}} </a> </h3>
+                </div>
+                <div class="panel-body">
+                    First name: {{user.first_name}} <br>
+                    Last name: {{user.last_name}} <br>
+                    Email: {{user.email}}
+                </div>
+            </div>
+        {% endfor %}
+
+{% endblock %}

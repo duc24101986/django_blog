@@ -1,0 +1,16 @@
+{% extends "blog/base.html" %}
+
+{% load bootstrap %}
+{% block title %} Add new post {% endblock %}
+
+{% block content %}
+    <!-- Blog Post -->
+    <h3>Add new post <br></h3>
+
+    <form method='POST' action="/blog/new" class="form-horizontal">
+        {{ post_form|bootstrap_horizontal}}
+        {% csrf_token %}
+        <button class="btn btn-large btn-primary" type="submit">Create post</button>
+    </form>
+
+{% endblock %}

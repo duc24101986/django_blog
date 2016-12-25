@@ -1,0 +1,22 @@
+{% extends "blog/base.html" %}
+
+{% load bootstrap %}
+{% block title %} Log-in {% endblock %}
+
+{% block content %}
+    <h1>Log-in</h1>
+    <br>
+    <div class="form-horizontal">
+        <form action="{% url 'login' %}" method="POST">
+            {{ form | bootstrap_horizontal }}
+            {% csrf_token %}
+            <input type="hidden" name="next" value="{{ next }}" />
+            <p><input class="btn btn-large btn-primary" type="submit" value="Log-in"></p>
+        </form>
+    </div>
+    <hr>
+
+{% endblock %}
+
+
+
