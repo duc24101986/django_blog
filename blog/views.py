@@ -110,10 +110,6 @@ def post_share(request, post_id):
 def dashboard(request):
 	return redirect('post_list')
 
-def user_list(request):
-	users = User.objects.all()
-	context = {'users': users, 'request_user': request.user}
-	return render(request, 'blog/user/list.html', context)
 
 
 

@@ -25,7 +25,5 @@ urlpatterns = [
 
 	url(r'^logout-then-login/$', auth_views.logout_then_login, name='logout_then_login'),
 
-	## User view
-	url(r'^user$', views.user_list, name='user_list')
 
 ]
